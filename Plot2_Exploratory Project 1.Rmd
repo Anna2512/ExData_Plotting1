@@ -1,0 +1,33 @@
+---
+title: "Course Project 1"
+output: html_document
+---
+
+
+## Plot 2
+
+
+```{r}
+setwd("C:/Users/Anhuynh/Desktop/Data Science_Cousera/Exploratory Data Analysis/Assignment")
+
+data <- read.csv("household_power_consumption.txt", header = TRUE, sep = ";", quote = "\"", na.strings = "?", nrows = 2075259, check.names = TRUE)
+data_extract <- subset(data, Date %in% c("1/2/2007", "2/2/2007"))
+data_extract$Date <- strptime(data_extract$Date, format = "%d/%m/%Y")
+
+datetime <- paste(as.Date(data_extract$Date), data_extract$Time)
+data_extract$DateTime <- as.POSIXct(datetime)
+
+with(data_extract, plot(Global_active_power~DateTime, type="l", xlab = "", ylab = "Global Active Power (kilowatts)" ))
+
+```
+
+## Add the PNG file
+
+```{r }
+png(fil="plot2.png", width=480, height=480)
+
+dev.off()
+
+```
+
+
